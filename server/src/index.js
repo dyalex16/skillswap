@@ -16,7 +16,10 @@ const app = express();
 const server = http.createServer(app);
 
 // Middleware
-app.use(cors());
+app.use(cors({
+  origin: process.env.CLIENT_URL || 'http://localhost:5173',
+  credentials: true
+}));
 app.use(express.json());
 
 // Routes
@@ -28,7 +31,10 @@ app.use('/api/meetings', meetingRoutes);
 
 // Socket.io
 const io = new Server(server, {
-  cors: { origin: '*' }
+  cors: { 
+    origin: process.env.CLIENT_URL || 'http://localhost:5173',
+    credentials: true
+  }
 });
 initSocket(io);
 

@@ -59,7 +59,8 @@ export const verifyEmail = async (req, res) => {
       data: { isVerified: true },
     })
 
-    res.redirect('http://localhost:5173/login?verified=true')
+    const clientUrl = process.env.CLIENT_URL || 'http://localhost:5173'
+    res.redirect(`${clientUrl}/login?verified=true`)
   } catch (error) {
     console.error(error)
     res.redirect('http://localhost:5173/login?verified=false')
