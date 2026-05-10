@@ -46,7 +46,7 @@ const Landing = () => {
       {/* Hero */}
       <div
         ref={heroRef}
-        className="flex-1 flex flex-col items-center justify-center text-center px-6 py-20"
+        className={`flex-1 flex flex-col items-center justify-center text-center px-6 py-20 ${fadeUp(heroInView)}`}
       >
         <div className="inline-block bg-indigo-900 border border-indigo-700 text-indigo-300 text-xs px-4 py-1.5 rounded-full mb-6">
           🚀 Connect with people who complement your skills
@@ -82,7 +82,7 @@ const Landing = () => {
       {/* Features */}
       <div
         ref={featuresRef} 
-        className="max-w-5xl mx-auto px-6 pb-20 grid grid-cols-1 md:grid-cols-3 gap-6"
+        className={`max-w-5xl mx-auto px-6 pb-20 grid grid-cols-1 md:grid-cols-3 gap-6 ${fadeUp(featuresInView)}`}
       >
         <div className="bg-gray-900 border border-gray-800 rounded-2xl p-6 hover:border-indigo-500 transition">
           <div className="text-3xl mb-4">🧠</div>
@@ -106,7 +106,7 @@ const Landing = () => {
       {/* CTA */}
       <div 
         ref={ctaRef}
-        className="border-t border-gray-900 py-16 text-center px-6"
+        className={`border-t border-gray-900 py-16 text-center px-6 ${fadeUp(ctaInView)}`}
       >
         <h3 className="text-3xl font-bold text-white mb-4">Ready to start swapping?</h3>
         <p className="text-gray-400 mb-8">Join SkillSwap today and find your perfect skill match.</p>
