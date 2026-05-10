@@ -1,10 +1,21 @@
 import { Link } from 'react-router-dom'
 import { useEffect } from 'react'
+import useInView from '../hooks/useInView'
+import Logo from '../components/Logo'
 
 const Landing = () => {
+  const [heroRef, heroInView] = useInView()
+  const [featuresRef, featuresInView] = useInView()
+  const [ctaRef, ctaInView] = useInView()
+
   useEffect(() => {
     document.title = 'SkillSwap — Connect. Learn. Grow.'
   }, [])
+
+  const fadeUp = (inView) => 
+    `transition-all duration-700 ease-out ${
+      inView ? 'opacity-100 translate-y-0' : 'opacity-0 translate-y-8'
+    }`
 
   return (
     <div className="min-h-screen bg-gray-950 text-white flex flex-col">
@@ -12,7 +23,7 @@ const Landing = () => {
       {/* Navbar */}
       <nav className="px-8 py-5 flex justify-between items-center border-b border-gray-900">
         <div className="flex items-center gap-2">
-          <div className="w-8 h-8 bg-indigo-500 rounded-lg flex items-center justify-center text-white font-bold text-sm">S</div>
+          <Logo />
           <h1 className="text-lg font-bold bg-gradient-to-r from-indigo-400 to-purple-400 bg-clip-text text-transparent">SkillSwap</h1>
         </div>
         <div className="flex items-center gap-3">
@@ -32,7 +43,10 @@ const Landing = () => {
       </nav>
 
       {/* Hero */}
-      <div className="flex-1 flex flex-col items-center justify-center text-center px-6 py-20">
+      <div
+        ref={heroRef}
+        className="flex-1 flex flex-col items-center justify-center text-center px-6 py-20"
+      >
         <div className="inline-block bg-indigo-900 border border-indigo-700 text-indigo-300 text-xs px-4 py-1.5 rounded-full mb-6">
           🚀 Connect with people who complement your skills
         </div>
@@ -65,7 +79,10 @@ const Landing = () => {
       </div>
 
       {/* Features */}
-      <div className="max-w-5xl mx-auto px-6 pb-20 grid grid-cols-1 md:grid-cols-3 gap-6">
+      <div
+        ref={featuresRef} 
+        className="max-w-5xl mx-auto px-6 pb-20 grid grid-cols-1 md:grid-cols-3 gap-6"
+      >
         <div className="bg-gray-900 border border-gray-800 rounded-2xl p-6 hover:border-indigo-500 transition">
           <div className="text-3xl mb-4">🧠</div>
           <h3 className="text-white font-semibold text-lg mb-2">Smart Matching</h3>
@@ -86,7 +103,10 @@ const Landing = () => {
       </div>
 
       {/* CTA */}
-      <div className="border-t border-gray-900 py-16 text-center px-6">
+      <div 
+        ref={ctaRef}
+        className="border-t border-gray-900 py-16 text-center px-6"
+      >
         <h3 className="text-3xl font-bold text-white mb-4">Ready to start swapping?</h3>
         <p className="text-gray-400 mb-8">Join SkillSwap today and find your perfect skill match.</p>
         <Link
