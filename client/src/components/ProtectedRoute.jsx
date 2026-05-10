@@ -6,7 +6,7 @@ const ProtectedRoute = ({ children }) => {
 
   if (loading) return <div className="min-h-screen flex items-center justify-center">Loading...</div>
 
-  if (!user) return <Navigate to="/login" />
+  if (!user) return <Navigate to="/home" />
 
   return children
 }
