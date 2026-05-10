@@ -8,14 +8,15 @@ const Landing = () => {
   const [featuresRef, featuresInView] = useInView()
   const [ctaRef, ctaInView] = useInView()
 
-  useEffect(() => {
-    document.title = 'SkillSwap — Connect. Learn. Grow.'
-  }, [])
-
   const fadeUp = (inView) => 
     `transition-all duration-700 ease-out ${
       inView ? 'opacity-100 translate-y-0' : 'opacity-0 translate-y-8'
     }`
+
+  useEffect(() => {
+    document.title = 'SkillSwap — Connect. Learn. Grow.'
+  }, [])
+
 
   return (
     <div className="min-h-screen bg-gray-950 text-white flex flex-col">
