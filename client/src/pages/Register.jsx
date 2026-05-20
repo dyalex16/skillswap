@@ -73,7 +73,7 @@ const Register = () => {
               name="name"
               value={form.name}
               onChange={handleChange}
-              placeholder="John Doe"
+              placeholder="username"
               required
               className="w-full bg-gray-800 border border-gray-700 rounded-lg px-4 py-2.5 text-sm text-white focus:outline-none focus:ring-2 focus:ring-indigo-500"
             />
@@ -86,7 +86,7 @@ const Register = () => {
               name="email"
               value={form.email}
               onChange={handleChange}
-              placeholder="john@example.com"
+              placeholder="name@domain.com"
               required
               className="w-full bg-gray-800 border border-gray-700 rounded-lg px-4 py-2.5 text-sm text-white focus:outline-none focus:ring-2 focus:ring-indigo-500"
             />
