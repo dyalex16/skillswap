@@ -47,7 +47,7 @@ const Navbar = ({ backTo, title }) => {
   
   return (
     <>
-      <nav className="sticky top-0 bg-gray-900 border-b border-gray-800 px-6 py-4 flex justify-between items-center">
+      <nav className="sticky top-0 z-30 bg-gray-900 border-b border-gray-800 px-6 py-4 flex justify-between items-center">
 
         {/* Left side */}
         {backTo ? (
