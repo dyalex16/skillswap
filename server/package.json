@@ -28,6 +28,7 @@
     "nodemailer": "^8.0.2",
     "pg": "^8.20.0",
     "prisma": "^7.5.0",
+    "resend": "^6.12.3",
     "socket.io": "^4.8.3",
     "ts-node": "^10.9.2",
     "typescript": "^5.9.3"
