@@ -23,6 +23,7 @@ export const register = async (req, res) => {
         name,
         email,
         password: hashedPassword,
+        isVerified: true,
       },
     })
 
@@ -37,7 +38,7 @@ export const register = async (req, res) => {
     await sendVerificationEmail(email, token)
 
     res.status(201).json({
-      message: 'Registration successful! Please check your email to verify your account.',
+      message: 'Registration successful!',
     })
   } catch (error) {
     console.error(error)

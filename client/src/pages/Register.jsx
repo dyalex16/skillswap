@@ -22,6 +22,7 @@ const Register = () => {
     try {
       await api.post('/auth/register', form)
       setRegistered(true)
+      setTimeout(()=> navigate('/login'), 2000)
     } catch (err) {
       setError(err.response?.data?.message || 'Something went wrong')
     } finally {
@@ -32,18 +33,10 @@ const Register = () => {
   // Check your email screen
   if (registered) {
     return (
-      <div className="min-h-screen bg-gradient-to-br from-gray-950 to-indigo-950 flex items-center justify-center px-4">
-        <div className="bg-gray-900 border border-gray-800 rounded-2xl shadow-lg p-8 w-full max-w-md text-center">
-          <div className="text-5xl mb-4">📬</div>
-          <h2 className="text-2xl font-bold text-white mb-2">Check your email</h2>
-          <p className="text-gray-400 text-sm mb-6">
-            We sent a verification link to <span className="text-indigo-400 font-medium">{form.email}</span>. Click the link to activate your account and you'll be redirected to login.
-          </p>
-          <p className="text-gray-600 text-xs">
-            Didn't receive it? Check your spam folder.
-          </p>
-        </div>
-      </div>
+      <p className="text-gray-400 text-sm mb-6">
+        Your account has been created successfully! 
+        Redirecting you to login...
+      </p>
     )
   }
 
