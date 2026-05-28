@@ -22,7 +22,7 @@ const Register = () => {
     try {
       await api.post('/auth/register', form)
       setRegistered(true)
-      setTimeout(()=> navigate('/login'), 2000)
+      setTimeout(() => navigate('/login'), 2000)
     } catch (err) {
       setError(err.response?.data?.message || 'Something went wrong')
     } finally {
@@ -33,10 +33,12 @@ const Register = () => {
   // Check your email screen
   if (registered) {
     return (
-      <p className="text-gray-400 text-sm mb-6">
-        Your account has been created successfully! 
-        Redirecting you to login...
-      </p>
+      <div className="min-h-screen bg-gray-950 flex items-center justify-center px-4">
+        <p className="text-gray-400 text-sm mb-6">
+          Your account has been created successfully! 
+          Redirecting you to login...
+        </p>
+      </div>
     )
   }
 
