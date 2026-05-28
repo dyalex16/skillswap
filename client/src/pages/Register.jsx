@@ -1,5 +1,5 @@
 import { useState } from 'react'
-import { Link } from 'react-router-dom'
+import { Link, useNavigate } from 'react-router-dom'
 import { Eye, EyeOff } from 'lucide-react'
 import api from '../api/axios'
 
@@ -9,6 +9,8 @@ const Register = () => {
   const [loading, setLoading] = useState(false)
   const [registered, setRegistered] = useState(false)
   const [showPassword, setShowPassword] = useState(false)
+
+  const navigate = useNavigate()
 
   const handleChange = (e) => {
     setForm({ ...form, [e.target.name]: e.target.value })
@@ -30,14 +32,19 @@ const Register = () => {
     }
   }
 
-  // Check your email screen
   if (registered) {
     return (
-      <div className="min-h-screen bg-gray-950 flex items-center justify-center px-4">
-        <p className="text-gray-400 text-sm mb-6">
-          Your account has been created successfully! 
-          Redirecting you to login...
-        </p>
+      <div className="min-h-screen bg-gradient-to-br from-gray-950 to-indigo-950 flex items-center justify-center px-4">
+        <div className="bg-gray-900 border border-gray-800 rounded-2xl shadow-lg p-8 w-full max-w-md text-center">
+          <div className="text-5xl mb-4">🎉</div>
+          <h2 className="text-2xl font-bold text-white mb-2">You're all set!</h2>
+          <p className="text-gray-400 text-sm mb-6">
+            Your account has been created successfully. Redirecting you to login...
+          </p>
+          <div className="w-full bg-gray-800 rounded-full h-1">
+            <div className="bg-indigo-500 h-1 rounded-full animate-[width_2s_ease-in-out]" />
+          </div>
+        </div>
       </div>
     )
   }
