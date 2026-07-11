@@ -4,6 +4,7 @@ import express from 'express'
 import cors from 'cors'
 import http from 'http'
 import { Server } from 'socket.io'
+import { apiLimiter, authLimiter } from './middleware/rateLimiter.js'
 
 import authRoutes from './routes/authRoutes.js';
 import userRoutes from './routes/userRoutes.js';
@@ -22,6 +23,8 @@ app.use(cors({
 }));
 app.use(express.json());
 
+app.use('/api', apiLimiter)
+app.use('/api/auth', authLimiter)
 // Routes
 app.use('/api/auth', authRoutes);
 app.use('/api/users', userRoutes);

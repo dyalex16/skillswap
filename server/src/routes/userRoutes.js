@@ -10,6 +10,7 @@ import {
   getAllUsers,
   uploadAvatar,
 } from '../controllers/userController.js'
+import { updateProfileRules, skillRules, validate } from '../middleware/validators.js'
 import authMiddleware from '../middleware/authMiddleware.js'
 
 const router = express.Router()
@@ -19,10 +20,10 @@ router.use(authMiddleware)
 
 router.get('/', getAllUsers)
 router.get('/me', getMe)
-router.put('/me', updateMe)
+router.put('/me', updateProfileRules, validate, updateMe)
 router.post('/avatar', upload.single('avatar'), uploadAvatar)
-router.post('/skills', addSkill)
-router.post('/wants', addWant)
+router.post('/skills', skillRules, validate, addSkill)
+router.post('/wants', skillRules, validate, addWant)
 router.delete('/skills/:skillId', removeSkill)
 router.delete('/wants/:skillId', removeWant)
 
