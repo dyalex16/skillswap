@@ -14,6 +14,7 @@ import { initSocket } from './socket/chatSocket.js';
 import meetingRoutes from './routes/meetingRoutes.js'
 
 const app = express();
+app.set('trust proxy', 1);
 const server = http.createServer(app);
 
 // Middleware
