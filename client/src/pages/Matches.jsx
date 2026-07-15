@@ -282,14 +282,14 @@ const Matches = () => {
                 <div className="flex flex-wrap gap-2 mb-2">
                   {m.userA.userSkills.map(us => (
                     <span key={us.skillId} className="bg-indigo-900 border border-indigo-800 text-indigo-300 text-xs px-2 py-1 rounded-full">
-                      {us.skill?.name}
+                      {us.skill.name.charAt(0).toUpperCase() + us.skill.name.slice(1)}
                     </span>
                   ))}
                 </div>
                 <div className="flex flex-wrap gap-2 mb-4">
                   {m.userA.userWants.map(uw => (
                     <span key={uw.skillId} className="bg-purple-900 border border-purple-800 text-purple-300 text-xs px-2 py-1 rounded-full">
-                      wants: {uw.skill?.name}
+                      wants: {uw.skill.name.charAt(0).toUpperCase() + uw.skill.name.slice(1)}
                     </span>
                   ))}
                 </div>

@@ -95,11 +95,13 @@ export const addSkill = async (req, res) => {
   try {
     const { skillName, level, category } = req.body
 
+    const normalizedName = skillName.trim().toLowerCase()
+
     // Find or create the skill
     const skill = await prisma.skill.upsert({
-      where: { name: skillName },
+      where: { name: normalizedName },
       update: {},
-      create: { name: skillName, category }
+      create: { name: normalizedName, category }
     })
 
     // Link to user
@@ -130,11 +132,13 @@ export const addWant = async (req, res) => {
   try {
     const { skillName, category } = req.body
 
+    const normalizedName = skillName.trim().toLowerCase()
+
     // Find or create the skill
     const skill = await prisma.skill.upsert({
-      where: { name: skillName },
+      where: { name: normalizedName },
       update: {},
-      create: { name: skillName, category }
+      create: { name: normalizedName, category }
     })
 
     // Link to user

@@ -290,7 +290,7 @@ const Profile = () => {
                 key={us.skillId}
                 className="flex items-center gap-1 bg-indigo-900 border border-indigo-700 text-indigo-300 text-xs px-3 py-1 rounded-full"
               >
-                {us.skill.name}
+                {us.skill.name.charAt(0).toUpperCase() + us.skill.name.slice(1)}
                 {us.level && <span className="text-indigo-500">· {us.level}</span>}
                 <button
                   onClick={() => handleRemoveSkill(us.skillId)}
@@ -347,7 +347,7 @@ const Profile = () => {
                 key={uw.skillId}
                 className="flex items-center gap-1 bg-purple-900 border border-purple-700 text-purple-300 text-xs px-3 py-1 rounded-full"
               >
-                {uw.skill.name}
+                {uw.skill.name.charAt(0).toUpperCase() + uw.skill.name.slice(1)}
                 <button
                   onClick={() => handleRemoveWant(uw.skillId)}
                   className="ml-1 text-purple-400 hover:text-red-400 transition"
