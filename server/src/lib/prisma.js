@@ -3,13 +3,12 @@ import { PrismaClient } from '@prisma/client'
 import { PrismaPg } from '@prisma/adapter-pg'
 import pg from 'pg'
 
-const connectionString = process.env.DATABASE_URL?.includes('?')
-  ? `${process.env.DATABASE_URL}&uselibpqcompat=true`
-  : `${process.env.DATABASE_URL}?uselibpqcompat=true`
-
 const pool = new pg.Pool({
-  connectionString,
-  ssl: { rejectUnauthorized: false }
+  connectionString: process.env.DATABASE_URL,
+  ssl: {
+    rejectUnauthorized: false,
+    checkServerIdentity: () => undefined
+  }
 })
 
 const adapter = new PrismaPg(pool)
