@@ -70,6 +70,7 @@ model Match {
 
   messages    Message[]
   meeting     Meeting?
+  insight     MatchInsight?
 
   @@unique([userAId, userBId])
 }
@@ -91,4 +92,13 @@ model Meeting {
   matchId   String  @unique
   roomUrl   String
   createdAt DateTime @default(now())
+}
+
+model MatchInsight {
+  id          String   @id @default(uuid())
+  matchId     String   @unique
+  match       Match    @relation(fields: [matchId], references: [id])
+  explanation String
+  starters    String[] // conversation starter suggestions
+  createdAt   DateTime @default(now())
 }
