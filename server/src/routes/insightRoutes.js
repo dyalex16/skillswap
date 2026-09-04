@@ -1,5 +1,5 @@
 import express from 'express'
-import { getMatchInsight } from '../controllers/insightController'
+import { getMatchInsight } from '../controllers/insightController.js'
 import authMiddleware from '../middleware/authMiddleware.js'
 
 const router = express.Router()
