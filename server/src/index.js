@@ -12,6 +12,7 @@ import matchRoutes from './routes/matchRoutes.js';
 import chatRoutes from './routes/chatRoutes.js';
 import { initSocket } from './socket/chatSocket.js';
 import meetingRoutes from './routes/meetingRoutes.js'
+import insightRoutes from './routes/insightRoutes.js'
 
 const app = express();
 app.set('trust proxy', 1);
@@ -30,6 +31,7 @@ app.use('/api/auth', authLimiter)
 app.use('/api/auth', authRoutes);
 app.use('/api/users', userRoutes);
 app.use('/api/matches', matchRoutes);
+app.use('/api/insights', insightRoutes)
 app.use('/api/chat', chatRoutes);
 app.use('/api/meetings', meetingRoutes);
 

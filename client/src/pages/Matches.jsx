@@ -16,6 +16,8 @@ const Matches = () => {
   const [loading, setLoading] = useState(true)
   const [activeTab, setActiveTab] = useState('suggestions')
   const [now, setNow] = useState(Date.now())
+  const [insights, setInsights] = useState({})
+  const [loadingInsight, setLoadingInsight] = useState({})
 
   useEffect(() => {
     const interval = setInterval(() => {
@@ -99,6 +101,19 @@ const Matches = () => {
       window.open(res.data.roomUrl, '_blank')
     } catch (err) {
       console.error(err)
+    }
+  }
+
+  const fetchInsight = async (matchId) => {
+    if (insights[matchId]) return // already fetched
+    setLoadingInsight(prev => ({ ...prev, [matchId]: true }))
+    try {
+      const res = await api.get(`/insights/${matchId}`)
+      setInsights(prev => ({ ...prev, [matchId]: res.data }))
+    } catch (err) {
+      console.error(err)
+    } finally {
+      setLoadingInsight(prev => ({ ...prev, [matchId]: false })) 
     }
   }
 
@@ -324,16 +339,15 @@ const Matches = () => {
               </div>
             )}
             {accepted.map(m => {
-              const other = m.userAId === user.id ? m.userB: m.userA
+              const other = m.userAId === user.id ? m.userB : m.userA
+              const insight = insights[m.id]
+              const isLoadingInsight = loadingInsight[m.id]
+
               return (
                 <div key={m.id} className="bg-gray-900 border border-gray-800 rounded-2xl p-6 hover:border-green-500 transition">
                   <div className="flex items-center gap-3 mb-4">
                     {other.avatarUrl ? (
-                      <img
-                        src={other.avatarUrl}
-                        alt="Avatar"
-                        className="w-10 h-10 rounded-full object-cover border-2 border-indigo-700"
-                      />
+                      <img src={other.avatarUrl} className="w-10 h-10 rounded-full object-cover border-2 border-green-700" />
                     ) : (
                       <div className="w-10 h-10 bg-green-700 rounded-full flex items-center justify-center text-white font-bold">
                         {other.name.charAt(0).toUpperCase()}
@@ -345,14 +359,47 @@ const Matches = () => {
                     </div>
                   </div>
 
+                  {/* Why This Match */}
+                  {!insight && !isLoadingInsight && (
+                    <button
+                      onClick={() => fetchInsight(m.id)}
+                      className="w-full mb-4 bg-gray-800 hover:bg-gray-700 border border-indigo-700 text-indigo-300 text-xs px-4 py-2.5 rounded-xl transition"
+                    >
+                      ✨ Why This Match?
+                    </button>
+                  )}
+
+                  {isLoadingInsight && (
+                    <div className="mb-4 bg-gray-800 border border-gray-700 rounded-xl p-4 animate-pulse">
+                      <div className="h-3 bg-gray-700 rounded w-3/4 mb-2" />
+                      <div className="h-3 bg-gray-700 rounded w-1/2" />
+                    </div>
+                  )}
+
+                  {insight && !insight.fallback && (
+                    <div className="mb-4 bg-gray-800 border border-indigo-800 rounded-xl p-4">
+                      <p className="text-indigo-300 text-xs font-medium mb-2">✨ Why you match</p>
+                      <p className="text-gray-300 text-sm mb-3">{insight.explanation}</p>
+                      <p className="text-indigo-300 text-xs font-medium mb-2">💬 Conversation starters</p>
+                      <ul className="space-y-1">
+                        {insight.starters.map((s, i) => (
+                          <li key={i} className="text-gray-400 text-xs flex items-start gap-2">
+                            <span className="text-indigo-500 mt-0.5">→</span>
+                            {s}
+                          </li>
+                        ))}
+                      </ul>
+                    </div>
+                  )}
+
                   <div className="flex gap-2">
                     <button
                       onClick={() => navigate(`/chat/${m.id}`)}
                       className="relative flex items-center gap-2 bg-indigo-600 hover:bg-indigo-500 text-white text-xs px-5 py-2 rounded-lg transition"
                     >
                       💬 Chat
-                      {unreadCounts[m.id] > 0 &&(
-                        <span className="absolute -top-1 -right-1 w-2.5 h-2.5 bg-yellow-300 rounded-full"></span>
+                      {unreadCounts[m.id] > 0 && (
+                        <span className="absolute -top-1.5 -right-1.5 w-2.5 h-2.5 bg-red-500 rounded-full animate-pulse" />
                       )}
                     </button>
                     <button
