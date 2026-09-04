@@ -167,7 +167,7 @@ const Chat = () => {
                     ? 'bg-indigo-600 text-white rounded-br-sm'
                     : 'bg-gray-800 text-gray-100 rounded-bl-sm'
                 }`}>
-                  <p className="break-words">{msg.content}</p>
+                  <p className="break-words font-verdana">{msg.content}</p>
                   <p className={`text-xs mt-1 ${isMe ? 'text-indigo-300' : 'text-gray-500'}`}>
                     {new Date(msg.createdAt).toLocaleTimeString([], {
                       hour: '2-digit',

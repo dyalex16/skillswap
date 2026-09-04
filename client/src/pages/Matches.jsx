@@ -4,6 +4,7 @@ import { Link, useNavigate } from 'react-router-dom'
 import { UserPlus, X } from 'lucide-react'
 import api from '../api/axios'
 import Navbar from '../components/Navbar'
+import TypingText from '../components/TypingText'
 
 const Matches = () => {
   const { user } = useAuth()
@@ -379,7 +380,9 @@ const Matches = () => {
                   {insight && !insight.fallback && (
                     <div className="mb-4 bg-gray-800 border border-indigo-800 rounded-xl p-4">
                       <p className="text-indigo-300 text-xs font-medium mb-2">✨ Why you match</p>
-                      <p className="text-gray-300 text-sm mb-3">{insight.explanation}</p>
+                      <p className="text-gray-300 text-sm mb-3">
+                        <TypingText text={insight.explanation} speed={18} />
+                      </p>
                       <p className="text-indigo-300 text-xs font-medium mb-2">💬 Conversation starters</p>
                       <ul className="space-y-1">
                         {insight.starters.map((s, i) => (
