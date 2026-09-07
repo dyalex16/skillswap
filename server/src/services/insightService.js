@@ -95,6 +95,7 @@ Respond ONLY with a JSON object in this exact format, no preamble or markdown:
     return insight
   } catch (error) {
     console.error('Insight generation failed:', error)
+     console.error('Full error:', JSON.stringify(error, null, 2))
     // Return null on failure — match still works without insight
     return null
   }

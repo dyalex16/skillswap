@@ -1,6 +1,7 @@
 import { Link } from 'react-router-dom'
 import { useEffect } from 'react'
 import useInView from '../hooks/useInView'
+import TypingText from '../components/TypingText'
 import Logo from '../components/Logo'
 
 const Landing = () => {
@@ -43,7 +44,7 @@ const Landing = () => {
         className={`flex-1 flex flex-col items-center justify-center text-center px-6 py-20 ${fadeUp(heroInView)}`}
       >
         <div className="inline-block bg-indigo-900 border border-indigo-700 text-indigo-300 text-xs px-4 py-1.5 rounded-full mb-6">
-          🚀 Connect with people who complement your skills
+          <TypingText text={'🚀 Connect with people who complement your skills'} speed={40} />
         </div>
 
         <h2 className="text-5xl md:text-6xl font-bold text-white leading-tight mb-6">
