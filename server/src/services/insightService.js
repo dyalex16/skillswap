@@ -1,8 +1,8 @@
-import Anthropic from '@anthropic-ai/sdk'
+import OpenAI from 'openai'
 import prisma from '../lib/prisma.js'
 
-const anthropic = new Anthropic({
-  apiKey: process.env.ANTHROPIC_API_KEY,
+const openai = new OpenAI({
+  apiKey: process.env.OPENAI_API_KEY,
 })
 
 export const generateMatchInsight = async (matchId) => {
@@ -74,14 +74,16 @@ Respond ONLY with a JSON object in this exact format, no preamble or markdown:
 }`
 
   try {
-    const response = await anthropic.messages.create({
-      model: 'claude-sonnet-4-6',
-      max_tokens: 1000,
-      messages: [{ role: 'user', content: prompt }]
+    const response = await openai.chat.completions.create({
+      model: 'gpt-3.5-turbo',
+      max_tokens: 500,
+      messages: [{ role: 'user', content: prompt }],
+      temperature: 0.7,
     })
 
-    const text = response.content[0].text
-    const parsed = JSON.parse(text)
+    const text = response.choices[0].message.content
+    const clean = text.replace(/```json|```/g, '').trim()
+    const parsed = JSON.parse(clean)
 
     // Cache in database
     const insight = await prisma.matchInsight.create({
@@ -95,7 +97,7 @@ Respond ONLY with a JSON object in this exact format, no preamble or markdown:
     return insight
   } catch (error) {
     console.error('Insight generation failed:', error)
-     console.error('Full error:', JSON.stringify(error, null, 2))
+    console.error('Full error:', JSON.stringify(error, null, 2))
     // Return null on failure — match still works without insight
     return null
   }
