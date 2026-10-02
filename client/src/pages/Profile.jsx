@@ -163,7 +163,10 @@ const Profile = () => {
 
   if (loading) return (
     <div className="min-h-screen bg-gray-950 flex items-center justify-center">
-      <Logo />
+      <img 
+        src="../swap-logo-1.jpg" alt="logo" 
+        className="w-full h-full object-cover rounded-xl animate-[spin_1s_linear_infinite]"
+      />
     </div>
   )
   
