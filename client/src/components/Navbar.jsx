@@ -51,7 +51,7 @@ const Navbar = ({ backTo, title }) => {
 
         {/* Left side */}
         {backTo ? (
-          <Link to={backTo} className="text-sm text-gray-400 hover:text-white transition">
+          <Link to={backTo} className="text-sm text-gray-400 hover:text-gray-900 transition">
             ← Back
           </Link>
         ) : (
@@ -86,18 +86,18 @@ const Navbar = ({ backTo, title }) => {
           {/* Desktop links */}
           {!backTo && (
             <div className="hidden md:flex items-center gap-6">
-                {/* Avatar */}
-                {user?.avatarUrl ? (
-                  <img
-                    src={user.avatarUrl}
-                    alt="Avatar"
-                    className="w-8 h-8 rounded-full object-cover border-2 border-indigo-500"
-                  />
-                ) : (
-                  <div className="w-8 h-8 bg-indigo-700 rounded-full flex items-center justify-center text-white font-bold text-sm">
-                    {user?.name.charAt(0).toUpperCase()}
-                  </div>
-                )}
+              {/* Avatar */}
+              {user?.avatarUrl ? (
+                <img
+                  src={user.avatarUrl}
+                  alt="Avatar"
+                  className="w-8 h-8 rounded-full object-cover border-2 border-indigo-500"
+                />
+              ) : (
+                <div className="w-8 h-8 bg-indigo-700 rounded-full flex items-center justify-center text-white font-bold text-sm">
+                  {user?.name.charAt(0).toUpperCase()}
+                </div>
+              )}
               {navLink('/', 'Dashboard')}
               {navLink('/profile', 'Profile')}
               {navLink('/matches', 'Matches')}

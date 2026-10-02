@@ -1,5 +1,5 @@
 import { useEffect, useState, useRef } from 'react'
-import { Link } from 'react-router-dom'
+import Logo from '../components/Logo'
 import { useAuth } from '../context/AuthContext'
 import api from '../api/axios'
 import Navbar from '../components/Navbar'
@@ -163,7 +163,7 @@ const Profile = () => {
 
   if (loading) return (
     <div className="min-h-screen bg-gray-950 flex items-center justify-center">
-      <p className="text-gray-400">Loading profile...</p>
+      <Logo className="animate-bounce"/>
     </div>
   )
   
